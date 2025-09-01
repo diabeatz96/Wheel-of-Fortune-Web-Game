@@ -3,7 +3,8 @@
     "allow": [
       "Bash(start index.html)",
       "WebSearch",
-      "Bash(node:*)"
+      "Bash(node:*)",
+      "mcp__ide__getDiagnostics"
     ],
     "deny": [],
     "ask": []

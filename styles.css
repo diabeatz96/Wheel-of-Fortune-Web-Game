@@ -1060,6 +1060,72 @@ body {
     box-shadow: 0 6px 20px rgba(255, 215, 0, 0.4);
 }
 
+/* Continue Game Section */
+.continue-game-section {
+    max-width: 600px;
+    width: 100%;
+    margin-bottom: 40px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255, 215, 0, 0.3);
+    border-radius: 15px;
+    padding: 30px;
+    text-align: center;
+    position: relative;
+    z-index: 20;
+    pointer-events: auto;
+}
+
+.continue-game-section h2 {
+    color: #ffd700;
+    margin-bottom: 15px;
+    text-shadow: 0 0 10px #ffd700;
+}
+
+.continue-game-section p {
+    color: #e0e0e0;
+    margin-bottom: 20px;
+    font-size: 1.1rem;
+}
+
+.continue-options {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.continue-options .mode-btn {
+    pointer-events: auto !important;
+    cursor: pointer !important;
+    position: relative !important;
+    z-index: 21 !important;
+}
+
+.mode-btn.primary {
+    background: linear-gradient(145deg, #4CAF50, #45a049);
+    border-color: #4CAF50;
+}
+
+.mode-btn.primary:hover {
+    background: linear-gradient(145deg, #45a049, #3d8b40);
+    border-color: #45a049;
+}
+
+.mode-btn.secondary {
+    background: linear-gradient(145deg, #f44336, #da190b);
+    border-color: #f44336;
+}
+
+.mode-btn.secondary:hover {
+    background: linear-gradient(145deg, #da190b, #c62828);
+    border-color: #da190b;
+}
+
+.hidden {
+    display: none !important;
+}
+
 /* Team Setup Screen */
 .team-setup {
     max-width: 800px;

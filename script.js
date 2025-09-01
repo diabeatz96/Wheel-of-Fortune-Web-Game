@@ -13,6 +13,7 @@ class MillionaireGame {
         this.teams = [];
         this.currentTeamIndex = 0;
         this.teamStats = new Map(); // Store team scores and progress
+        this.storageKey = 'wwtbdGame'; // Local storage key
         this.moneyLadder = [
             "1 Ramen Cup", 
             "1 Energy Drink", 
@@ -101,6 +102,84 @@ class MillionaireGame {
             this.currentBackgroundMusic.pause();
             this.currentBackgroundMusic.currentTime = 0;
             this.currentBackgroundMusic = null;
+        }
+    }
+
+    // Local Storage Methods
+    saveGameState() {
+        try {
+            const gameState = {
+                currentQuestion: this.currentQuestion,
+                currentTopic: this.currentTopic,
+                currentDifficulty: this.currentDifficulty,
+                gameOver: this.gameOver,
+                usedLifelines: { ...this.usedLifelines },
+                gameMode: this.gameMode,
+                teams: [...this.teams],
+                currentTeamIndex: this.currentTeamIndex,
+                teamStats: Object.fromEntries(this.teamStats),
+                currentQuestions: this.currentQuestions,
+                timestamp: new Date().toISOString()
+            };
+            localStorage.setItem(this.storageKey, JSON.stringify(gameState));
+            console.log('Game state saved successfully');
+            return true;
+        } catch (error) {
+            console.error('Failed to save game state:', error);
+            return false;
+        }
+    }
+
+    loadGameState() {
+        try {
+            const savedState = localStorage.getItem(this.storageKey);
+            if (!savedState) return null;
+            
+            const gameState = JSON.parse(savedState);
+            
+            // Restore all game state properties
+            this.currentQuestion = gameState.currentQuestion;
+            this.currentTopic = gameState.currentTopic;
+            this.currentDifficulty = gameState.currentDifficulty;
+            this.gameOver = gameState.gameOver;
+            this.usedLifelines = { ...gameState.usedLifelines };
+            this.gameMode = gameState.gameMode;
+            this.teams = [...gameState.teams];
+            this.currentTeamIndex = gameState.currentTeamIndex;
+            this.teamStats = new Map(Object.entries(gameState.teamStats));
+            this.currentQuestions = gameState.currentQuestions;
+            
+            console.log('Game state loaded successfully');
+            return gameState;
+        } catch (error) {
+            console.error('Failed to load game state:', error);
+            return null;
+        }
+    }
+
+    hasSavedGame() {
+        try {
+            const savedState = localStorage.getItem(this.storageKey);
+            if (!savedState) return false;
+            
+            const gameState = JSON.parse(savedState);
+            // Check if it's a valid game state with progress
+            return gameState.currentQuestion > 0 || 
+                   (gameState.gameMode === 'team' && gameState.teams.length > 0);
+        } catch (error) {
+            console.error('Error checking saved game:', error);
+            return false;
+        }
+    }
+
+    clearSavedGame() {
+        try {
+            localStorage.removeItem(this.storageKey);
+            console.log('Saved game cleared');
+            return true;
+        } catch (error) {
+            console.error('Failed to clear saved game:', error);
+            return false;
         }
     }
 
@@ -900,7 +979,65 @@ class MillionaireGame {
     init() {
         this.bindEvents();
         this.initAudioUI();
+        this.checkForSavedGame();
         this.showScreen('start-screen');
+    }
+
+    checkForSavedGame() {
+        console.log('Checking for saved game...');
+        
+        // For testing: temporarily show the continue section to test buttons
+        // Comment this out after testing
+        this.createTestSavedGame();
+        
+        if (this.hasSavedGame()) {
+            console.log('Saved game found, showing continue options');
+            const continueSection = document.getElementById('continue-game-section');
+            const gameModeSelection = document.querySelector('.game-mode-selection');
+            
+            // Show continue option and hide game mode selection
+            continueSection.classList.remove('hidden');
+            gameModeSelection.style.display = 'none';
+            
+            // Update saved game info with details
+            try {
+                const savedState = localStorage.getItem(this.storageKey);
+                const gameState = JSON.parse(savedState);
+                const infoElement = document.getElementById('saved-game-info');
+                
+                if (gameState.gameMode === 'team') {
+                    infoElement.textContent = `Team tournament in progress: ${gameState.teams.length} teams, Question ${gameState.currentQuestion + 1}`;
+                } else {
+                    infoElement.textContent = `Individual game in progress: Question ${gameState.currentQuestion + 1} of 10, Topic: ${gameState.currentTopic.toUpperCase()}`;
+                }
+            } catch (error) {
+                document.getElementById('saved-game-info').textContent = 'You have a saved game in progress.';
+            }
+        } else {
+            console.log('No saved game found, showing game mode selection');
+            // Hide continue section and show game mode selection
+            document.getElementById('continue-game-section').classList.add('hidden');
+            document.querySelector('.game-mode-selection').style.display = 'block';
+        }
+    }
+
+    // Test method to create a fake saved game for testing
+    createTestSavedGame() {
+        const testGameState = {
+            currentQuestion: 2,
+            currentTopic: 'javascript',
+            currentDifficulty: 'easy',
+            gameOver: false,
+            usedLifelines: { fiftyFifty: false, askAudience: false, phoneAFriend: false },
+            gameMode: 'individual',
+            teams: [],
+            currentTeamIndex: 0,
+            teamStats: {},
+            currentQuestions: [],
+            timestamp: new Date().toISOString()
+        };
+        localStorage.setItem(this.storageKey, JSON.stringify(testGameState));
+        console.log('Test saved game created');
     }
 
     initAudioUI() {
@@ -911,6 +1048,44 @@ class MillionaireGame {
     }
 
     bindEvents() {
+        // Wait for DOM to be ready and bind continue game buttons
+        setTimeout(() => {
+            const continueGameBtn = document.getElementById('continue-game-btn');
+            const newGameBtn = document.getElementById('new-game-btn');
+            
+            console.log('Binding continue game buttons:', { continueGameBtn, newGameBtn });
+            
+            if (continueGameBtn) {
+                console.log('Binding continue game button');
+                continueGameBtn.addEventListener('click', (e) => {
+                    console.log('Continue game button clicked');
+                    e.preventDefault();
+                    e.stopPropagation();
+                    this.continueGame();
+                });
+                // Test if button is clickable
+                continueGameBtn.style.border = '2px solid red';
+                continueGameBtn.style.zIndex = '9999';
+            } else {
+                console.error('Continue game button not found!');
+            }
+            
+            if (newGameBtn) {
+                console.log('Binding new game button');
+                newGameBtn.addEventListener('click', (e) => {
+                    console.log('New game button clicked');
+                    e.preventDefault();
+                    e.stopPropagation();
+                    this.startNewGame();
+                });
+                // Test if button is clickable
+                newGameBtn.style.border = '2px solid red';
+                newGameBtn.style.zIndex = '9999';
+            } else {
+                console.error('New game button not found!');
+            }
+        }, 100);
+
         // Game mode selection
         const individualBtn = document.getElementById('individual-mode-btn');
         const teamBtn = document.getElementById('team-mode-btn');
@@ -1046,6 +1221,10 @@ class MillionaireGame {
     selectDifficulty(difficulty) {
         this.currentDifficulty = difficulty;
         this.currentQuestions = [...this.questions[this.currentTopic][difficulty]].sort(() => Math.random() - 0.5);
+        
+        // Save initial game state
+        this.saveGameState();
+        
         this.showScreen('game-screen');
         this.loadQuestion();
     }
@@ -1266,6 +1445,9 @@ class MillionaireGame {
                 this.playSound('correctAnswer');
                 this.currentQuestion++;
                 
+                // Save game progress
+                this.saveGameState();
+                
                 if (this.currentQuestion < 10) {
                     setTimeout(() => this.playSound('moneyWin'), 1000);
                 }
@@ -1449,6 +1631,9 @@ class MillionaireGame {
     endGame(won, customAmount = null, customMessage = null) {
         this.gameOver = true;
         
+        // Clear saved game since the game is over
+        this.clearSavedGame();
+        
         if (this.gameMode === 'team') {
             // Team mode - show tournament results
             this.showTeamTournamentResults();
@@ -1510,6 +1695,61 @@ class MillionaireGame {
     }
 
     // Team Tournament Methods
+    continueGame() {
+        console.log('Attempting to continue game...');
+        
+        const loadedState = this.loadGameState();
+        if (loadedState) {
+            console.log('Game state loaded successfully:', loadedState);
+            
+            // Restore UI state based on game mode
+            if (this.gameMode === 'team') {
+                this.updateTeamInfo();
+                this.showScreen('game-screen');
+            } else {
+                this.showScreen('game-screen');
+            }
+            
+            // Restore the current question display
+            this.loadQuestion();
+            
+            // Update UI elements
+            this.updateMoneyLadder();
+            this.updateLifelines();
+            
+            console.log(`Resumed ${this.gameMode} game at question ${this.currentQuestion + 1}`);
+        } else {
+            console.error('Failed to load game state');
+            this.startNewGame();
+        }
+    }
+
+    startNewGame() {
+        console.log('Starting new game...');
+        
+        // Clear any saved game
+        this.clearSavedGame();
+        
+        // Reset game state
+        this.currentQuestion = 0;
+        this.currentTopic = null;
+        this.currentDifficulty = null;
+        this.gameOver = false;
+        this.usedLifelines = {
+            fiftyFifty: false,
+            askAudience: false,
+            phoneAFriend: false
+        };
+        this.teams = [];
+        this.currentTeamIndex = 0;
+        this.teamStats = new Map();
+        this.currentQuestions = [];
+        
+        // Reset the start screen to show game mode selection
+        document.getElementById('continue-game-section').classList.add('hidden');
+        document.querySelector('.game-mode-selection').style.display = 'block';
+    }
+
     selectGameMode(mode) {
         this.gameMode = mode;
         if (mode === 'individual') {
@@ -1710,6 +1950,10 @@ class MillionaireGame {
         // Team chooses to continue and risk all points
         document.getElementById('team-decision').classList.add('hidden');
         this.currentQuestion++;
+        
+        // Save game progress
+        this.saveGameState();
+        
         this.prepareNextQuestion();
         
         console.log(`${this.getCurrentTeam()} chose to continue and risk ${this.teamStats.get(this.getCurrentTeam()).score} points`);
@@ -1719,6 +1963,10 @@ class MillionaireGame {
         // Team chooses to pass and keep points safe
         document.getElementById('team-decision').classList.add('hidden');
         this.currentQuestion++; // Move to next question
+        
+        // Save game progress
+        this.saveGameState();
+        
         this.moveToNextTeam();  // Move to next team
         this.prepareNextQuestion();
         
