@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(start index.html)",
+      "WebSearch",
+      "Bash(node:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

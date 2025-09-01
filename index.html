@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Who Wants to be a Web Developer?</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Prism.js for syntax highlighting -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet">
+    <!-- Marked.js for markdown parsing -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/9.1.2/marked.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-css.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-markup.min.js"></script>
+</head>
+<body>
+    <div id="game-container">
+        <div class="audio-control">
+            <button id="audio-toggle" class="muted" title="Toggle Audio"></button>
+        </div>
+        <div id="start-screen" class="screen active">
+            <h1>Who Wants to be a Web Developer?</h1>
+            <p>Test your knowledge of HTML, CSS, and JavaScript!</p>
+            <div class="game-mode-selection">
+                <h2>Choose Game Mode:</h2>
+                <button id="individual-mode-btn" class="mode-btn">Individual Player</button>
+                <button id="team-mode-btn" class="mode-btn">Team Tournament</button>
+            </div>
+        </div>
+
+        <div id="team-setup-screen" class="screen">
+            <h1>Team Tournament Setup</h1>
+            <p>Set up your teams for the tournament</p>
+            <div class="team-setup">
+                <div class="team-input-section">
+                    <h3>Add Teams:</h3>
+                    <div class="team-input">
+                        <input type="text" id="team-name-input" placeholder="Enter team name" maxlength="20">
+                        <button id="add-team-btn">Add Team</button>
+                    </div>
+                    <div class="suggested-teams">
+                        <p>Quick Add:</p>
+                        <button class="quick-team-btn">HTML Heroes</button>
+                        <button class="quick-team-btn">CSS Crusaders</button>
+                        <button class="quick-team-btn">JS Jedis</button>
+                        <button class="quick-team-btn">React Rangers</button>
+                        <button class="quick-team-btn">Node Ninjas</button>
+                    </div>
+                </div>
+                <div class="teams-list">
+                    <h3>Teams Added:</h3>
+                    <ul id="teams-list"></ul>
+                </div>
+                <div class="team-setup-controls">
+                    <button id="start-tournament-btn" class="start-btn" disabled>Start Tournament</button>
+                    <button id="back-to-menu-btn" class="back-btn">Back to Menu</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="topic-screen" class="screen">
+            <h1>Choose Your Topic</h1>
+            <p id="topic-subtitle">Test your knowledge of HTML, CSS, and JavaScript!</p>
+            <div class="topic-selection">
+                <button class="topic-btn" data-topic="html">HTML</button>
+                <button class="topic-btn" data-topic="css">CSS</button>
+                <button class="topic-btn" data-topic="javascript">JavaScript</button>
+            </div>
+        </div>
+
+        <div id="difficulty-screen" class="screen">
+            <h1>Select Difficulty Level</h1>
+            <p>Choose your challenge level for <span id="selected-topic">HTML</span> questions</p>
+            <div class="difficulty-selection">
+                <div class="difficulty-option">
+                    <button class="difficulty-btn" data-difficulty="easy">
+                        <h3>Easy</h3>
+                        <p>Basic concepts and syntax</p>
+                    </button>
+                </div>
+                <div class="difficulty-option">
+                    <button class="difficulty-btn" data-difficulty="medium">
+                        <h3>Medium</h3>
+                        <p>Intermediate concepts and best practices</p>
+                    </button>
+                </div>
+                <div class="difficulty-option">
+                    <button class="difficulty-btn" data-difficulty="hard">
+                        <h3>Hard</h3>
+                        <p>Advanced concepts and complex scenarios</p>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div id="game-screen" class="screen">
+            <div id="team-info" class="team-info hidden">
+                <div class="current-team">
+                    <h3>Current Team: <span id="current-team-name">Team Name</span></h3>
+                    <div class="team-progress">Question <span id="team-question-num">1</span> | Score: <span id="team-score">0</span></div>
+                </div>
+                <div class="team-rotation">
+                    <div class="rotation-controls">
+                        <button id="next-team-btn" class="rotation-btn">Next Team</button>
+                        <button id="show-leaderboard-btn" class="rotation-btn">Show Leaderboard</button>
+                    </div>
+                </div>
+            </div>
+            <div class="game-layout">
+                <div class="main-area">
+                    <div class="question-area">
+                        <div class="question-number">Question <span id="current-question">1</span> of 10</div>
+                        <div class="money-display">For <span id="current-money">1 Ramen Cup</span></div>
+                        <div id="question-text">Question will appear here</div>
+                        <div class="answers">
+                            <button class="answer-btn" data-answer="A"><span class="answer-letter">A:</span> <span class="answer-text"></span></button>
+                            <button class="answer-btn" data-answer="B"><span class="answer-letter">B:</span> <span class="answer-text"></span></button>
+                            <button class="answer-btn" data-answer="C"><span class="answer-letter">C:</span> <span class="answer-text"></span></button>
+                            <button class="answer-btn" data-answer="D"><span class="answer-letter">D:</span> <span class="answer-text"></span></button>
+                        </div>
+                        <div id="explanation" class="explanation hidden">
+                            <h4>Explanation:</h4>
+                            <p id="explanation-text"></p>
+                            <button id="next-question-btn" class="next-btn">Next Question</button>
+                        </div>
+                        <div id="team-decision" class="team-decision hidden">
+                            <h4>Correct! What's your choice?</h4>
+                            <p>You earned 1 point! Choose wisely:</p>
+                            <div class="decision-buttons">
+                                <button id="continue-risk-btn" class="decision-btn risk-btn">
+                                    <span class="btn-title">Continue & Risk</span>
+                                    <span class="btn-description">Try next question - lose ALL points if wrong</span>
+                                </button>
+                                <button id="pass-safe-btn" class="decision-btn safe-btn">
+                                    <span class="btn-title">Pass & Keep Points</span>
+                                    <span class="btn-description">Keep current points safe - next team plays</span>
+                                </button>
+                            </div>
+                        </div>
+                        <div id="team-wrong" class="team-wrong hidden">
+                            <h4>Wrong Answer!</h4>
+                            <p id="team-wrong-message">All points lost! Next team's turn.</p>
+                            <button id="next-team-btn-wrong" class="next-btn">Next Team</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="sidebar">
+                    <div class="lifelines">
+                        <h3>Lifelines</h3>
+                        <button id="fifty-fifty" class="lifeline-btn" title="50:50">50:50</button>
+                        <button id="ask-audience" class="lifeline-btn" title="Ask the Audience">👥</button>
+                        <button id="phone-friend" class="lifeline-btn" title="Phone a Friend">📞</button>
+                    </div>
+                    
+                    <div class="money-ladder">
+                        <h3>Money Ladder</h3>
+                        <div class="ladder">
+                            <div class="ladder-step current" data-level="1"><span class="step-number">1</span><span class="step-amount">1 Ramen Cup</span></div>
+                            <div class="ladder-step" data-level="2"><span class="step-number">2</span><span class="step-amount">1 Energy Drink</span></div>
+                            <div class="ladder-step" data-level="3"><span class="step-number">3</span><span class="step-amount">1 Pizza Slice</span></div>
+                            <div class="ladder-step" data-level="4"><span class="step-number">4</span><span class="step-amount">1 Coffee & Donut</span></div>
+                            <div class="ladder-step milestone" data-level="5"><span class="step-number">5</span><span class="step-amount">1 Movie Ticket</span></div>
+                            <div class="ladder-step" data-level="6"><span class="step-number">6</span><span class="step-amount">1 Textbook (Used!)</span></div>
+                            <div class="ladder-step" data-level="7"><span class="step-number">7</span><span class="step-amount">1 Gaming Headset</span></div>
+                            <div class="ladder-step" data-level="8"><span class="step-number">8</span><span class="step-amount">1 Laptop Upgrade</span></div>
+                            <div class="ladder-step" data-level="9"><span class="step-number">9</span><span class="step-amount">1 Semester Parking Pass</span></div>
+                            <div class="ladder-step" data-level="10"><span class="step-number">10</span><span class="step-amount">1 MILLION DOLLARS!</span></div>
+                        </div>
+                    </div>
+                    
+                    <button id="walk-away" class="walk-away-btn">Walk Away</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="result-screen" class="screen">
+            <div class="result-content">
+                <h2 id="result-title">Congratulations!</h2>
+                <div id="final-amount">You won 1 MILLION DOLLARS!</div>
+                <div id="result-message">You've mastered web development!</div>
+                
+                <!-- Individual mode options -->
+                <div id="individual-end-options" class="end-options">
+                    <button id="play-again" class="end-option-btn primary">Play Again</button>
+                </div>
+                
+                <!-- Team mode options -->
+                <div id="team-end-options" class="end-options hidden">
+                    <div class="winner-display">
+                        <h3>🏆 Tournament Winner!</h3>
+                        <div id="winning-team">Team Name</div>
+                        <div id="winning-score">Final Score: X points</div>
+                    </div>
+                    
+                    <div class="final-leaderboard">
+                        <h4>Final Standings:</h4>
+                        <div id="final-standings"></div>
+                    </div>
+                    
+                    <div class="replay-options">
+                        <h4>What's Next?</h4>
+                        <button id="reset-and-replay" class="end-option-btn primary">
+                            <span class="btn-title">Reset & Play Again</span>
+                            <span class="btn-description">New tournament, all scores reset to 0</span>
+                        </button>
+                        <button id="new-quiz-keep-scores" class="end-option-btn secondary">
+                            <span class="btn-title">New Quiz - Keep Scores</span>
+                            <span class="btn-description">Continue with current points</span>
+                        </button>
+                        <button id="back-to-mode-selection" class="end-option-btn tertiary">
+                            <span class="btn-title">Change Game Mode</span>
+                            <span class="btn-description">Individual vs Team selection</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="leaderboard-screen" class="screen">
+            <div class="leaderboard-content">
+                <h2>Team Tournament Leaderboard</h2>
+                <div id="leaderboard-table">
+                    <div class="leaderboard-header">
+                        <span>Rank</span>
+                        <span>Team</span>
+                        <span>Score</span>
+                        <span>Questions Answered</span>
+                    </div>
+                    <div id="leaderboard-rows"></div>
+                </div>
+                <div class="leaderboard-controls">
+                    <button id="continue-tournament-btn" class="continue-btn">Continue Tournament</button>
+                    <button id="end-tournament-btn" class="end-btn">End Tournament</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="audience-poll" class="modal">
+            <div class="modal-content">
+                <h3>Ask the Audience</h3>
+                <div class="poll-results">
+                    <div class="poll-bar" data-answer="A"><span class="poll-letter">A</span><div class="bar"><div class="bar-fill"></div></div><span class="poll-percentage">0%</span></div>
+                    <div class="poll-bar" data-answer="B"><span class="poll-letter">B</span><div class="bar"><div class="bar-fill"></div></div><span class="poll-percentage">0%</span></div>
+                    <div class="poll-bar" data-answer="C"><span class="poll-letter">C</span><div class="bar"><div class="bar-fill"></div></div><span class="poll-percentage">0%</span></div>
+                    <div class="poll-bar" data-answer="D"><span class="poll-letter">D</span><div class="bar"><div class="bar-fill"></div></div><span class="poll-percentage">0%</span></div>
+                </div>
+                <button id="close-poll" class="modal-close">Continue</button>
+            </div>
+        </div>
+
+        <div id="phone-friend-modal" class="modal">
+            <div class="modal-content">
+                <h3>Phone a Friend</h3>
+                <div class="friend-advice">
+                    <p id="friend-message">Your friend is thinking...</p>
+                </div>
+                <button id="close-phone" class="modal-close">Continue</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
