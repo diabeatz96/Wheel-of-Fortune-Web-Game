@@ -1,0 +1,87 @@
+{
+  "name": "CSS Questions", 
+  "description": "Test your knowledge of CSS styling and layout",
+  "easy": [
+    {
+      "question": "How will this CSS style the text?\n\n```css\n.title {\n  color: red;\n  font-size: 24px;\n  text-align: center;\n}\n```\n\n```html\n<h1 class='title'>Welcome</h1>\n```",
+      "answers": [
+        "<h1 style='color: red; font-size: 24px; text-align: center; margin: 0;'>Welcome</h1>",
+        "<h1 style='color: black; font-size: 24px; text-align: left; margin: 0;'>Welcome</h1>", 
+        "<h1 style='color: red; font-size: 24px; text-align: center; text-transform: uppercase; margin: 0;'>Welcome</h1>",
+        "<h1 style='color: red; font-size: 16px; text-align: center; margin: 0;'>Welcome</h1>"
+      ],
+      "correct": 0,
+      "explanation": "The CSS applies red color, 24px font size, and center alignment to the h1 element with class 'title'."
+    },
+    {
+      "question": "What layout will this CSS create?\n\n```css\n.container {\n  display: flex;\n  justify-content: space-between;\n}\n```\n\n```html\n<div class='container'>\n  <div>A</div>\n  <div>B</div>\n  <div>C</div>\n</div>\n```",
+      "answers": [
+        "```\nA              B              C\n(evenly spaced across container)\n```",
+        "```\nA B C\n(close together)\n```",
+        "```\nA\nB\nC\n(stacked vertically)\n```", 
+        "```\nC B A\n(reversed order)\n```"
+      ],
+      "correct": 0,
+      "explanation": "Flexbox with justify-content: space-between distributes items with equal space between them, but not around them."
+    },
+    {
+      "question": "What will this CSS positioning create?\n\n```css\n.box {\n  position: absolute;\n  top: 50px;\n  right: 20px;\n  width: 100px;\n  height: 100px;\n  background: blue;\n}\n```",
+      "answers": [
+        "<div style='position: relative; width: 300px; height: 200px; border: 1px dashed #ccc; margin: 10px;'>Container<div style='position: absolute; top: 50px; right: 20px; width: 100px; height: 100px; background: blue;'></div></div>",
+        "<div style='position: relative; width: 300px; height: 200px; border: 1px dashed #ccc; margin: 10px;'>Container<div style='position: absolute; top: 50px; left: 20px; width: 100px; height: 100px; background: blue;'></div></div>",
+        "<div style='position: relative; width: 300px; height: 200px; border: 1px dashed #ccc; margin: 10px;'>Container<div style='position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 100px; height: 100px; background: blue;'></div></div>",
+        "<div style='position: relative; width: 300px; height: 200px; border: 1px dashed #ccc; margin: 10px;'>Container<div style='position: static; width: 100px; height: 100px; background: blue; margin: 10px;'></div></div>"
+      ],
+      "correct": 0,
+      "explanation": "Absolute positioning removes the element from normal flow and positions it 50px from the top and 20px from the right edge of its positioned ancestor."
+    },
+    {
+      "question": "What visual effect will this CSS create?\n\n```css\n.card {\n  background: white;\n  border-radius: 10px;\n  box-shadow: 0 4px 8px rgba(0,0,0,0.1);\n  padding: 20px;\n}\n```",
+      "answers": [
+        "<div style='background: white; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); padding: 20px; margin: 10px; width: 200px;'>Card Content</div>",
+        "<div style='background: white; padding: 20px; margin: 10px; width: 200px;'>Card Content</div>", 
+        "<div style='background: white; border: 2px solid black; padding: 20px; margin: 10px; width: 200px;'>Card Content</div>",
+        "<div style='background: transparent; box-shadow: 0 4px 8px rgba(0,0,0,0.1); padding: 20px; margin: 10px; width: 200px;'>Card Content</div>"
+      ],
+      "correct": 0,
+      "explanation": "The CSS creates a white background with rounded corners (border-radius), a subtle drop shadow (box-shadow), and 20px internal spacing (padding)."
+    }
+  ],
+  "medium": [
+    {
+      "question": "What visual effect will this CSS gradient create?\n\n```css\n.banner {\n  background: linear-gradient(45deg, \n    #ff6b6b 0%, \n    #4ecdc4 50%, \n    #45b7d1 100%\n  );\n}\n```",
+      "answers": [
+        "<div style='background: #ff6b6b; width: 200px; height: 80px; margin: 10px; border-radius: 5px; display: flex; align-items: center; justify-content: center; color: white;'>Solid Red</div>",
+        "<div style='background: linear-gradient(45deg, #ff6b6b 0%, #4ecdc4 50%, #45b7d1 100%); width: 200px; height: 80px; margin: 10px; border-radius: 5px; display: flex; align-items: center; justify-content: center; color: white;'>45° Gradient</div>", 
+        "<div style='background: linear-gradient(to bottom, #ff6b6b 0%, #4ecdc4 50%, #45b7d1 100%); width: 200px; height: 80px; margin: 10px; border-radius: 5px; display: flex; align-items: center; justify-content: center; color: white;'>Vertical</div>",
+        "<div style='background: linear-gradient(to right, #ff6b6b 0%, #4ecdc4 50%, #45b7d1 100%); width: 200px; height: 80px; margin: 10px; border-radius: 5px; display: flex; align-items: center; justify-content: center; color: white;'>Horizontal</div>"
+      ],
+      "correct": 1,
+      "explanation": "The linear-gradient creates a diagonal (45deg) color transition from red (#ff6b6b) to teal (#4ecdc4) to blue (#45b7d1)."
+    },
+    {
+      "question": "What sizing will this CSS rem/em comparison create?\n\n```css\nhtml { font-size: 16px; }\n.parent { font-size: 20px; }\n.child-em { font-size: 1.5em; }\n.child-rem { font-size: 1.5rem; }\n```\n\n```html\n<div class='parent'>\n  <span class='child-em'>EM Text</span>\n  <span class='child-rem'>REM Text</span>\n</div>\n```",
+      "answers": [
+        "<div style='font-size: 20px; margin: 10px; border: 1px dashed #ccc; padding: 10px;'><span style='font-size: 24px;'>EM Text</span> <span style='font-size: 24px;'>REM Text</span></div>",
+        "<div style='font-size: 20px; margin: 10px; border: 1px dashed #ccc; padding: 10px;'><span style='font-size: 30px;'>EM Text</span> <span style='font-size: 24px;'>REM Text</span></div>", 
+        "<div style='font-size: 20px; margin: 10px; border: 1px dashed #ccc; padding: 10px;'><span style='font-size: 24px;'>EM Text</span> <span style='font-size: 30px;'>REM Text</span></div>",
+        "<div style='font-size: 20px; margin: 10px; border: 1px dashed #ccc; padding: 10px;'><span style='font-size: 16px;'>EM Text</span> <span style='font-size: 16px;'>REM Text</span></div>"
+      ],
+      "correct": 1,
+      "explanation": "'em' calculates from parent font-size (20px), 'rem' calculates from root font-size (16px), so 1.5em = 30px and 1.5rem = 24px."
+    }
+  ],
+  "hard": [
+    {
+      "question": "How will this box-sizing comparison affect element dimensions?\n\n```css\n.content-box {\n  box-sizing: content-box;\n  width: 200px;\n  padding: 20px;\n  border: 5px solid black;\n}\n\n.border-box {\n  box-sizing: border-box;\n  width: 200px;\n  padding: 20px;\n  border: 5px solid black;\n}\n```",
+      "answers": [
+        "<div style='margin: 10px;'><div style='box-sizing: content-box; width: 200px; padding: 20px; border: 5px solid black; background: lightblue; margin-bottom: 5px;'>Content-box</div><div style='box-sizing: border-box; width: 200px; padding: 20px; border: 5px solid black; background: lightcoral;'>Border-box</div></div>",
+        "<div style='margin: 10px;'><div style='box-sizing: content-box; width: 200px; padding: 20px; border: 5px solid black; background: lightblue; margin-bottom: 5px; display: inline-block;'>Content-box (250px)</div><br><div style='box-sizing: border-box; width: 200px; padding: 20px; border: 5px solid black; background: lightcoral; display: inline-block;'>Border-box (200px)</div></div>", 
+        "<div style='margin: 10px;'><div style='box-sizing: content-box; width: 200px; padding: 20px; border: 5px solid red; background: lightblue; margin-bottom: 5px; display: inline-block;'>Content-box (200px)</div><br><div style='width: 250px; padding: 20px; border: 5px solid black; background: lightcoral; display: inline-block;'>Border-box (250px)</div></div>",
+        "<div style='margin: 10px;'><div style='width: 250px; padding: 20px; border: 5px solid black; background: lightblue; margin-bottom: 5px;'>Both 250px</div><div style='width: 250px; padding: 20px; border: 5px solid black; background: lightcoral;'>Both 250px</div></div>"
+      ],
+      "correct": 1,
+      "explanation": "Content-box adds padding/border to width (200+40+10=250px), border-box includes padding/border within the width (stays 200px total)."
+    }
+  ]
+}

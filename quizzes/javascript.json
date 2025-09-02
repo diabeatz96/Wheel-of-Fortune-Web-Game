@@ -1,0 +1,87 @@
+{
+  "name": "JavaScript Questions",
+  "description": "Test your knowledge of JavaScript programming and logic", 
+  "easy": [
+    {
+      "question": "What will this JavaScript code output?\n\n```javascript\nlet x = 5;\nlet y = 10;\nconsole.log(x + y);\nconsole.log('x + y');\n```",
+      "answers": [
+        "```\n15\nx + y\n```",
+        "```\n5 + 10\nx + y\n```",
+        "```\n15\n15\n```", 
+        "```\nx + y\nx + y\n```"
+      ],
+      "correct": 0,
+      "explanation": "The first console.log performs mathematical addition (5 + 10 = 15), while the second prints the literal string 'x + y'."
+    },
+    {
+      "question": "What does this function return?\n\n```javascript\nfunction greet(name) {\n  return 'Hello ' + name + '!';\n}\n\nconsole.log(greet('Alice'));\n```",
+      "answers": [
+        "```\nHello Alice!\n```",
+        "```\ngreet Alice\n```",
+        "```\nHello + Alice + !\n```", 
+        "```\nundefined\n```"
+      ],
+      "correct": 0,
+      "explanation": "The function concatenates strings: 'Hello ' + 'Alice' + '!' = 'Hello Alice!' and returns this value."
+    },
+    {
+      "question": "What will this array code output?\n\n```javascript\nlet fruits = ['apple', 'banana', 'cherry'];\nconsole.log(fruits[1]);\nconsole.log(fruits.length);\n```",
+      "answers": [
+        "```\nbanana\n3\n```",
+        "```\napple\n3\n```",
+        "```\nbanana\n2\n```",
+        "```\ncherry\n3\n```"
+      ],
+      "correct": 0,
+      "explanation": "Arrays are zero-indexed: fruits[1] is 'banana' (second element), and the array has 3 elements total."
+    },
+    {
+      "question": "What does this conditional code output?\n\n```javascript\nlet score = 85;\nif (score >= 90) {\n  console.log('A');\n} else if (score >= 80) {\n  console.log('B');\n} else {\n  console.log('C');\n}\n```",
+      "answers": [
+        "```\nA\n```",
+        "```\nB\n```", 
+        "```\nC\n```",
+        "```\n85\n```"
+      ],
+      "correct": 1,
+      "explanation": "Since score (85) is >= 80 but < 90, it matches the second condition and outputs 'B'."
+    }
+  ],
+  "medium": [
+    {
+      "question": "What will this object code output?\n\n```javascript\nlet person = {\n  name: 'John',\n  age: 30,\n  greet: function() {\n    return 'Hi, I am ' + this.name;\n  }\n};\nconsole.log(person.greet());\n```",
+      "answers": [
+        "```\nHi, I am John\n```",
+        "```\nHi, I am undefined\n```",
+        "```\nfunction() { return 'Hi, I am ' + this.name; }\n```",
+        "```\nHi, I am [object Object]\n```"
+      ],
+      "correct": 0,
+      "explanation": "The method is called on the person object, so 'this' refers to person, and this.name is 'John'."
+    },
+    {
+      "question": "What does this loop output?\n\n```javascript\nfor (let i = 0; i < 3; i++) {\n  setTimeout(() => console.log(i), 100);\n}\n```",
+      "answers": [
+        "```\n0\n1\n2\n```",
+        "```\n3\n3\n3\n```",
+        "```\n1\n2\n3\n```",
+        "```\nundefined\nundefined\nundefined\n```"
+      ],
+      "correct": 0,
+      "explanation": "Using 'let' creates a new binding for each iteration, so each setTimeout captures the correct value of i."
+    }
+  ],
+  "hard": [
+    {
+      "question": "What does this closure example output?\n\n```javascript\nfunction createCounter() {\n  let count = 0;\n  return function() {\n    count++;\n    return count;\n  };\n}\n\nlet counter = createCounter();\nconsole.log(counter());\nconsole.log(counter());\n```",
+      "answers": [
+        "```\n1\n2\n```",
+        "```\n0\n1\n```",
+        "```\n1\n1\n```",
+        "```\nundefined\nundefined\n```"
+      ],
+      "correct": 0,
+      "explanation": "The returned function forms a closure over the 'count' variable, maintaining its state between calls."
+    }
+  ]
+}

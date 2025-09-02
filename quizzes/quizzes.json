@@ -1,0 +1,29 @@
+{
+  "default": ["html", "css", "javascript", "sample-custom"],
+  "available": [
+    {
+      "id": "html",
+      "name": "HTML Questions", 
+      "description": "Test your knowledge of HTML markup and structure",
+      "file": "html.json"
+    },
+    {
+      "id": "css",
+      "name": "CSS Questions",
+      "description": "Test your knowledge of CSS styling and layout", 
+      "file": "css.json"
+    },
+    {
+      "id": "javascript", 
+      "name": "JavaScript Questions",
+      "description": "Test your knowledge of JavaScript programming and logic",
+      "file": "javascript.json"
+    },
+    {
+      "id": "sample-custom",
+      "name": "Sample Custom Quiz",
+      "description": "A sample quiz showing how to create your own custom quiz",
+      "file": "sample-custom.json"
+    }
+  ]
+}

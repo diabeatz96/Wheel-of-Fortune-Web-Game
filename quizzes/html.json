@@ -1,0 +1,87 @@
+{
+  "name": "HTML Questions",
+  "description": "Test your knowledge of HTML markup and structure",
+  "easy": [
+    {
+      "question": "What will this HTML code render?\n\n```html\n<div>\n  <h2>Welcome</h2>\n  <p>Hello <strong>World</strong>!</p>\n  <ul>\n    <li>Item 1</li>\n    <li>Item 2</li>\n  </ul>\n</div>\n```",
+      "answers": [
+        "<h2>Welcome</h2><p>Hello <strong>World</strong>!</p><ul><li>Item 1</li><li>Item 2</li></ul>", 
+        "<h2>Welcome</h2><p>Hello <strong>World</strong>!</p><ol><li>Item 1</li><li>Item 2</li></ol>",
+        "<h2 style='text-transform:uppercase'>Welcome</h2><p>Hello <strong>World</strong>!</p><ul><li>Item 1</li><li>Item 2</li></ul>",
+        "<h2>Welcome</h2><p>Hello <strong style='text-transform:uppercase'>WORLD</strong>!</p><ul><li>Item 1</li><li>Item 2</li></ul>"
+      ],
+      "correct": 0,
+      "explanation": "The <h2> renders as normal heading, <strong> makes text bold (not caps), and <ul> creates bullet points (not numbers)."
+    },
+    {
+      "question": "What will this HTML form render?\n\n```html\n<form>\n  <label for='email'>Email:</label>\n  <input type='email' id='email' required>\n  <input type='submit' value='Send'>\n</form>\n```",
+      "answers": [
+        "<label>Email:</label> <input type='text' style='border:1px solid #ccc; padding:2px'> <input type='submit' value='Send' style='padding:2px 8px'>",
+        "<label>Email:</label> <input type='email' required style='border:1px solid #ccc; padding:2px'> <input type='submit' value='Send' style='padding:2px 8px'>", 
+        "<input type='email' required style='border:1px solid #ccc; padding:2px'> <input type='submit' value='Send' style='padding:2px 8px'>",
+        "<span>Email</span> <input type='email' style='border:1px solid #ccc; padding:2px'> <span>Send</span>"
+      ],
+      "correct": 1,
+      "explanation": "The label creates 'Email:' text, type='email' creates a validated email field, and type='submit' creates a Send button."
+    },
+    {
+      "question": "How will this table render?\n\n```html\n<table border='1'>\n  <tr>\n    <th>Name</th>\n    <th>Age</th>\n  </tr>\n  <tr>\n    <td>John</td>\n    <td>25</td>\n  </tr>\n</table>\n```",
+      "answers": [
+        "<table border='1' style='border-collapse:collapse'><tr><th style='padding:4px;font-weight:bold'>Name</th><th style='padding:4px;font-weight:bold'>Age</th></tr><tr><td style='padding:4px'>John</td><td style='padding:4px'>25</td></tr></table>",
+        "<div>Name Age</div><div>John 25</div>",
+        "<table border='1' style='border-collapse:collapse'><tr><th style='padding:4px;font-weight:bold;text-transform:uppercase'>Name</th><th style='padding:4px;font-weight:bold;text-transform:uppercase'>Age</th></tr><tr><td style='padding:4px'>John</td><td style='padding:4px'>25</td></tr></table>", 
+        "<div>Name: John</div><div>Age: 25</div>"
+      ],
+      "correct": 0,
+      "explanation": "<th> creates header cells (bold by default), <td> creates data cells, and border='1' adds table borders."
+    },
+    {
+      "question": "What does this HTML structure render?\n\n```html\n<div>\n  <img src='logo.png' alt='Company Logo' width='100'>\n  <a href='#home'>Home</a> |\n  <a href='#about'>About</a>\n</div>\n```",
+      "answers": [
+        "<img src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjUwIiB2aWV3Qm94PSIwIDAgMTAwIDUwIiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8cmVjdCB3aWR0aD0iMTAwIiBoZWlnaHQ9IjUwIiBmaWxsPSIjY2NjIi8+Cjx0ZXh0IHg9IjUwIiB5PSIzMCIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjEyIiBmaWxsPSIjNjY2IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj5MT0dPPC90ZXh0Pgo8L3N2Zz4K' alt='Company Logo' width='100'> <a href='#home' style='color:blue;text-decoration:underline'>Home</a> | <a href='#about' style='color:blue;text-decoration:underline'>About</a>",
+        "<span>Company Logo</span> <a href='#home' style='color:blue;text-decoration:underline'>Home</a> | <a href='#about' style='color:blue;text-decoration:underline'>About</a>",
+        "<span>logo.png</span> <a href='#home' style='color:blue;text-decoration:underline'>Home</a> | <a href='#about' style='color:blue;text-decoration:underline'>About</a>", 
+        "<img src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjUwIiB2aWV3Qm94PSIwIDAgMTAwIDUwIiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8cmVjdCB3aWR0aD0iMTAwIiBoZWlnaHQ9IjUwIiBmaWxsPSIjY2NjIi8+Cjx0ZXh0IHg9IjUwIiB5PSIzMCIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjEyIiBmaWxsPSIjNjY2IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj5MT0dPPC90ZXh0Pgo8L3N2Zz4K' alt='Company Logo' width='100'> <span style='text-transform:uppercase'><a href='#home' style='color:blue;text-decoration:underline'>HOME</a> | <a href='#about' style='color:blue;text-decoration:underline'>ABOUT</a></span>"
+      ],
+      "correct": 0,
+      "explanation": "<img> displays the actual image at 100px width, while <a> tags create clickable links. Alt text only shows if image fails to load."
+    }
+  ],
+  "medium": [
+    {
+      "question": "What will this nested HTML render?\n\n```html\n<div>\n  <select name='country'>\n    <option value='us'>United States</option>\n    <option value='ca' selected>Canada</option>\n    <option value='mx'>Mexico</option>\n  </select>\n</div>\n```",
+      "answers": [
+        "<select><option>United States</option><option selected>Canada</option><option>Mexico</option></select>",
+        "<select><option selected>United States</option><option>Canada</option><option>Mexico</option></select>", 
+        "<div>United States</div><div>Canada</div><div>Mexico</div>",
+        "<input type='radio' name='country'> United States<br><input type='radio' name='country' checked> Canada<br><input type='radio' name='country'> Mexico"
+      ],
+      "correct": 0,
+      "explanation": "The <select> creates a dropdown, and the 'selected' attribute on the Canada option makes it the default choice."
+    },
+    {
+      "question": "How does this HTML render?\n\n```html\n<blockquote>\n  <p>\"To be or not to be\"</p>\n  <cite>Shakespeare</cite>\n</blockquote>\n```",
+      "answers": [
+        "<blockquote style='margin-left:40px;font-style:italic'><p>\"To be or not to be\"</p><cite style='font-style:italic'>Shakespeare</cite></blockquote>",
+        "<span>\"To be or not to be\" Shakespeare</span>",
+        "<div style='text-transform:uppercase'>TO BE OR NOT TO BE<br>SHAKESPEARE</div>", 
+        "<span>\"To be or not to be\" - Shakespeare</span>"
+      ],
+      "correct": 0,
+      "explanation": "<blockquote> indents the content, <p> creates a paragraph, and <cite> typically renders in italics for citations."
+    }
+  ],
+  "hard": [
+    {
+      "question": "What will this code structure render?\n\n```html\n<dl>\n  <dt>HTML</dt>\n  <dd>Markup Language</dd>\n  <dt>CSS</dt>\n  <dd>Style Sheets</dd>\n</dl>\n```",
+      "answers": [
+        "<dl><dt style='font-weight:bold'>HTML</dt><dd style='margin-left:20px'>Markup Language</dd><dt style='font-weight:bold'>CSS</dt><dd style='margin-left:20px'>Style Sheets</dd></dl>",
+        "<div>HTML: Markup Language</div><div>CSS: Style Sheets</div>",
+        "<ul><li>HTML - Markup Language</li><li>CSS - Style Sheets</li></ul>",
+        "<ol><li>HTML Markup Language</li><li>CSS Style Sheets</li></ol>"
+      ],
+      "correct": 0,
+      "explanation": "<dl> creates a description list, <dt> are terms (bold), and <dd> are descriptions (indented)."
+    }
+  ]
+}

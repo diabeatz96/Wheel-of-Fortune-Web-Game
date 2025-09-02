@@ -1,0 +1,54 @@
+{
+  "name": "Sample Custom Quiz",
+  "description": "A sample quiz showing how to create your own custom quiz",
+  "easy": [
+    {
+      "question": "What is the capital of France?",
+      "answers": [
+        "Paris",
+        "London", 
+        "Berlin",
+        "Rome"
+      ],
+      "correct": 0,
+      "explanation": "Paris is the capital and most populous city of France."
+    },
+    {
+      "question": "Which planet is closest to the Sun?",
+      "answers": [
+        "Venus",
+        "Earth",
+        "Mercury",
+        "Mars"
+      ],
+      "correct": 2,
+      "explanation": "Mercury is the smallest planet in our solar system and the closest to the Sun."
+    }
+  ],
+  "medium": [
+    {
+      "question": "What is the chemical symbol for gold?",
+      "answers": [
+        "Go",
+        "Au",
+        "Ag", 
+        "Gd"
+      ],
+      "correct": 1,
+      "explanation": "Au comes from the Latin word 'aurum' meaning gold."
+    }
+  ],
+  "hard": [
+    {
+      "question": "In what year was the first iPhone released?",
+      "answers": [
+        "2006",
+        "2007",
+        "2008",
+        "2009"
+      ],
+      "correct": 1,
+      "explanation": "The first iPhone was announced by Steve Jobs on January 9, 2007, and released on June 29, 2007."
+    }
+  ]
+}

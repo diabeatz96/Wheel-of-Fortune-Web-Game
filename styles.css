@@ -1122,6 +1122,25 @@ body {
     border-color: #da190b;
 }
 
+.mode-btn.danger {
+    background: linear-gradient(145deg, #d32f2f, #b71c1c);
+    border-color: #d32f2f;
+    color: white;
+    font-size: 14px;
+    margin-top: 15px;
+}
+
+.mode-btn.danger:hover {
+    background: linear-gradient(145deg, #b71c1c, #8b0000);
+    border-color: #b71c1c;
+}
+
+.delete-data-section {
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
 .hidden {
     display: none !important;
 }

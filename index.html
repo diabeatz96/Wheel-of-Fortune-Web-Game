@@ -29,6 +29,9 @@
                     <button id="continue-game-btn" class="mode-btn primary">Continue Game</button>
                     <button id="new-game-btn" class="mode-btn secondary">Start New Game</button>
                 </div>
+                <div class="delete-data-section">
+                    <button id="delete-all-data-btn" class="mode-btn danger">Delete All Saved Data</button>
+                </div>
             </div>
             <div class="game-mode-selection">
                 <h2>Choose Game Mode:</h2>
@@ -70,10 +73,8 @@
         <div id="topic-screen" class="screen">
             <h1>Choose Your Topic</h1>
             <p id="topic-subtitle">Test your knowledge of HTML, CSS, and JavaScript!</p>
-            <div class="topic-selection">
-                <button class="topic-btn" data-topic="html">HTML</button>
-                <button class="topic-btn" data-topic="css">CSS</button>
-                <button class="topic-btn" data-topic="javascript">JavaScript</button>
+            <div class="topic-selection" id="topic-buttons">
+                <!-- Topic buttons will be dynamically generated here -->
             </div>
         </div>
 
