@@ -6,23 +6,21 @@ An interactive quiz game testing knowledge of HTML, CSS, and JavaScript, with su
 
 **Requires a web server** - The application must be served over HTTP (not file://) to load quiz JSON files.
 
-### Option 1: Python Server (Recommended)
+### Option 1: VS Code Live Server (Recommended)
+1. Install the "Live Server" extension in VS Code
+2. Right-click `index.html` → **"Open with Live Server"**
+3. Game opens automatically at `http://127.0.0.1:5500`
+
+### Option 2: Node.js Server
 ```bash
-# Windows/Mac/Linux:
-python -m http.server 8000
-# OR
-python3 -m http.server 8000
+npx serve .
+# Opens at http://localhost:3000
 ```
 
-Then open: **http://localhost:8000**
-
-### Option 2: Other Web Servers
+### Option 3: Other Web Servers
 ```bash
-# Node.js
-npx serve .
-
-# Live Server (VS Code extension)
-# Right-click index.html → "Open with Live Server"
+# Python (if you have it)
+python -m http.server 8000
 
 # Any other HTTP server pointing to the project directory
 ```
@@ -93,7 +91,7 @@ See `quizzes/README.md` for detailed instructions.
 ## 🔧 Technical Requirements
 
 - **Modern web browser** (Chrome, Firefox, Safari, Edge)
-- **Python 3.x** (for dynamic quiz loading)
+- **Web server** (VS Code Live Server, Node.js, or any HTTP server)
 - **Local files** must be served via web server for full functionality
 
 ## 🎨 Game Assets
@@ -107,16 +105,12 @@ See `quizzes/README.md` for detailed instructions.
 
 ### "Failed to fetch" errors:
 - **Cause**: Opening `index.html` directly (file:// protocol)
-- **Solution**: Use any web server (Python, Node.js, Live Server, etc.)
+- **Solution**: Use VS Code Live Server, `npx serve .`, or any web server
 
 ### Custom quizzes not appearing:
 - Ensure `quizzes.json` manifest includes your quiz
 - Check JSON syntax is valid
 - Restart the server after adding quizzes
-
-### Python not found:
-- Install Python from [python.org](https://www.python.org/)
-- Ensure Python is added to system PATH
 
 ## 📁 Project Structure
 
@@ -215,9 +209,9 @@ cd wheel-of-fortune-web-game
 
 ### 2. Set Up Development Environment
 ```bash
-# No dependencies needed! Just start any web server
-python -m http.server 8000
-# Open http://localhost:8000
+# No dependencies needed! Just start a web server
+npx serve .
+# OR use VS Code Live Server extension
 ```
 
 ### 3. Project Customization Ideas
